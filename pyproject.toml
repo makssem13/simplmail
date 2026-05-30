@@ -8,7 +8,7 @@ authors = [
   { name="Semenii Maksym", email="maks20sem@gmail.com" },
 ]
 description = "Simple email client"
-dependencies = ["recanvas", "jinja2", "msgpack"]
+dependencies = []
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
