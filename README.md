@@ -80,8 +80,9 @@ And any other text protocol that has CRLF line endings!
 ## Features
 
 simplmail includes commands and tools right in the console! (they should be written inside the session and not in the shell):
-- `smail autotag` for automatic tags in IMAP
-- `smail autopong` for automatic pong in IRC
+- `smail autotag y` for automatic tags in IMAP
+- `smail autopong y` for automatic pong in IRC
+- `smail starttls` for starting TLS (SSL) in unencrypted connection
 - `smail quit` or `smail exit` for exit
 
 And if the line starts with the `$` sign, simplmail will send text after it in base64 encoding. That is very useful for SMTP `AUTH LOGIN`!

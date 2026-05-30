@@ -3,7 +3,7 @@ import ssl, socket, base64, sys, threading
 print("Simplmail v0.1 (and not only email)")
 HOST = input("HOST>") if len(sys.argv)<2 else sys.argv[1]
 PORT = int(input("PORT>")) if len(sys.argv)<3 else int(sys.argv[2])
-SSL = True if PORT in [993, 995, 465, 6697] else False if input("SSL (Y/n)>").lower() in ["n"] else True
+SSL = True if PORT in [993, 995, 465, 6697, 7000] else False if PORT in [143, 587, 110, 25, 587, 6667, 6665, 6666, 6669] else False if input("SSL (Y/n)>").lower() in ["n"] else True
 
 def get_instr():
     match PORT:
@@ -18,10 +18,15 @@ AUTOTAG = False
 
 sock = socket.create_connection((HOST, PORT))
 print(f"Created connection to {HOST}:{PORT}.")
-if SSL:
+
+def starttls():
+    global ctx, conn
     ctx = ssl.create_default_context()
     conn = ctx.wrap_socket(sock, server_hostname=HOST)
     print("Initialized SSL.")
+
+if SSL:
+    starttls()
 else:
     conn = sock
 
@@ -68,19 +73,24 @@ def reader():
             print_msg(data)
             autoreply(data)
 
-def scommand(cmd):
+def scommand(command):
     global AUTOPONG, AUTOTAG
+    data = command.split(" ")
+    cmd = data[0]
+    params = data[1:] if len(data)>1 else []
     match cmd:
         case "quit" | "exit":
             exit(0)
         case "autopong":
-            AUTOPONG = True
-        case "noautopong":
-            AUTOPONG = False
+            if params != []:
+                AUTOPONG = params[0].lower().startswith("y")
+                print(f"SMAIL: autopong {'enabled' if AUTOPONG else 'disabled'}")
         case "autotag":
-            AUTOTAG = True
-        case "noautotag":
-            AUTOTAG = False
+            if params != []:
+                AUTOTAG = params[0].lower().startswith("y")
+                print(f"SMAIL: autotag {'enabled' if AUTOTAG else 'disabled'}")
+        case "starttls":
+            starttls()
     return
 
 print()
