@@ -1,0 +1,4 @@
+*~
+src/simplmail/__pycache__
+src/simplmail/_version.py
+*.egg-info
