@@ -105,4 +105,4 @@ while True:
     elif cmd != "":
         if cmd[0] == "$":
             cmd = base64.b64encode(cmd[1:].encode()).decode()
-        send(cmd)
+    send(cmd)
