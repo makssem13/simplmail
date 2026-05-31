@@ -22,6 +22,8 @@ print(f"Created connection to {HOST}:{PORT}.")
 def starttls():
     global ctx, conn
     ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
     conn = ctx.wrap_socket(sock, server_hostname=HOST)
     print("Initialized SSL.")
 
