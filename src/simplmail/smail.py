@@ -56,7 +56,7 @@ def send(data):
 
 def print_msg(msg):
     sys.stdout.write("\033[2K\r")
-    sys.stdout.write("\r"+msg+)
+    sys.stdout.write("\r"+msg)
     sys.stdout.write(INSTR)
     sys.stdout.flush()
 
