@@ -56,7 +56,7 @@ def send(data):
 
 def print_msg(msg):
     sys.stdout.write("\033[2K\r")
-    sys.stdout.write(msg+"\n")
+    sys.stdout.write("\r"+msg+)
     sys.stdout.write(INSTR)
     sys.stdout.flush()
 
@@ -96,10 +96,11 @@ def scommand(command):
     return
 
 print()
+print()
 threading.Thread(target=reader, daemon=True).start()
 
 while True:
-    cmd = input(f"{INSTR}")
+    cmd = input(f"\r{INSTR}")
     if cmd.lower().startswith("smail"):
         scommand(cmd.lower()[6:])
     elif cmd != "":
