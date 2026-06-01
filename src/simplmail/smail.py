@@ -103,6 +103,7 @@ while True:
     cmd = input(f"\r{INSTR}")
     if cmd.lower().startswith("smail"):
         scommand(cmd.lower()[6:])
+        continue
     elif cmd != "":
         if cmd[0] == "$":
             cmd = base64.b64encode(cmd[1:].encode()).decode()
