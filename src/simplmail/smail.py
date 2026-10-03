@@ -11,6 +11,7 @@ def get_instr():
         case 110 | 995: return "POP3"
         case 25 | 465 | 587: return "SMTP"
         case 6667 | 6665 | 6666 | 6668 | 6669 | 6697 | 7000: return "IRC"
+    return "SIMPLMAIL"
 
 INSTR = get_instr()+">"
 AUTOPONG = False
@@ -66,7 +67,7 @@ def autoreply(msg):
             server = msg.split(":")[1] if ":" in msg else ""
             cmd = f"PONG{f' :{server}' if server else ''}"
             send(cmd)
-            print_msg(f"SMAIL AUTOREPLY: {cmd}")
+            print_msg(f"SIMLPMAIL AUTOREPLY: {cmd}")
 
 def reader():
     while 1:
@@ -86,11 +87,11 @@ def scommand(command):
         case "autopong":
             if params != []:
                 AUTOPONG = params[0].lower().startswith("y")
-                print(f"SMAIL: autopong {'enabled' if AUTOPONG else 'disabled'}")
+                print(f"SIMPLMAIL: autopong {'enabled' if AUTOPONG else 'disabled'}")
         case "autotag":
             if params != []:
                 AUTOTAG = params[0].lower().startswith("y")
-                print(f"SMAIL: autotag {'enabled' if AUTOTAG else 'disabled'}")
+                print(f"SIMPLMAIL: autotag {'enabled' if AUTOTAG else 'disabled'}")
         case "starttls":
             starttls()
     return
